@@ -6,7 +6,6 @@ on:
 jobs:
   deploy-rust-server:
     runs-on: self-hosted
-    needs: create-env-file
     
     steps:
     - name: Checkout du code
