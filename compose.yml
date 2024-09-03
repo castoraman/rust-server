@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  rust-server:
+    image: didstopia/rust-server:latest
+    container_name: rust-server
+    ports:
+      - "28015:28015"
+      - "28016:28016"
+      - "28017:28017"
+      - "28017:28017/udp"
+      - "28015:28015/udp"
+      - "28082:28082"
+      - "8080:8080"
+    volumes:
+      - ~/rust/files:/steamcmd/rust
+    env_file:
+      - ~/rust/rust.env
+    restart: unless-stopped
