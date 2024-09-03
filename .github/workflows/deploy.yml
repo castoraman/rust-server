@@ -1,9 +1,10 @@
 name: Déployer Le Serveur Rust
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Créer le fichier .env"]
+    types:
+      - completed
 
 jobs:
   deploy-rust-server:
