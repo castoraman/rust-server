@@ -47,9 +47,3 @@ jobs:
             else:
                 print(f"Erreur lors du téléchargement de {plugin}.cs : {response.status_code}")
       shell: python
-      
-    - name: Archiver les plugins téléchargés
-      uses: actions/upload-artifact@v2
-      with:
-        name: downloaded-plugins
-        path: downloaded_plugins
