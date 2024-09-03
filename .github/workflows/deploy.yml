@@ -8,6 +8,7 @@ on:
 jobs:
   deploy-rust-server:
     runs-on: self-hosted
+    needs: create-env-file
     
     steps:
     - name: Checkout du code
@@ -15,4 +16,4 @@ jobs:
       
     - name: Démarrer le serveur Rust
       run: |
-        docker-compose -f compose.yml up -d
+        docker compose -f compose.yml up -d
