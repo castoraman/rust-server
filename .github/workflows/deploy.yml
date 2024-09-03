@@ -1,10 +1,7 @@
 name: Déployer Le Serveur Rust
 
 on:
-  workflow_run:
-    workflows: ["Créer le fichier .env"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   deploy-rust-server:
