@@ -33,11 +33,3 @@ jobs:
         RUST_OXIDE_ENABLED=1
         RUST_UPDATE_CHECKING=1
         EOF
-        
-    - name: Commit et push le fichier .env
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .env
-        git commit -m "Mise à jour du fichier .env"
-        git push
