@@ -5,13 +5,13 @@ services:
     image: didstopia/rust-server:latest
     container_name: rust-server
     ports:
-      - "28015:28015"
-      - "28016:28016"
-      - "28017:28017"
-      - "28017:28017/udp"
-      - "28015:28015/udp"
-      - "28082:28082"
-      - "8080:8080"
+      - "28015:28015"     # Game
+      - "28015:28015/udp" # Game
+      - "28016:28016"     # RCon
+      - "28017:28017"     # Query
+      - "28017:28017/udp" # Query
+      - "28082:28082"     # App
+      - "8080:8080"       # Web UI
     volumes:
       - ~/rust/files:/steamcmd/rust
     env_file:
