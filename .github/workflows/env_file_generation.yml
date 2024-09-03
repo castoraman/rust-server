@@ -1,0 +1,43 @@
+name: Créer le fichier .env
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-env-file:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v2
+      
+    - name: Créer le fichier .env
+      env:
+        RCON_PASSWORD: ${{ secrets.RCON_PASSWORD }}
+        SERVER_NAME: ${{ vars.SERVER_NAME }}
+        SERVER_DESCRIPTION: ${{ vars.SERVER_DESCRIPTION }}
+        BANNER_URL: ${{ vars.BANNER_URL }}
+      run: |
+        cat << EOF > ~/rust/local-files/server.env
+        RUST_SERVER_STARTUP_ARGUMENTS=-batchmode -load +server.secure 1
+        RUST_SERVER_IDENTITY=RustBar2
+        RUST_SERVER_NAME=$SERVER_NAME
+        RUST_SERVER_DESCRIPTION=$SERVER_DESCRIPTION
+        RUST_RCON_PASSWORD=$RCON_PASSWORD
+        RUST_SERVER_MAXPLAYERS=64
+        RUST_SERVER_WORLDSIZE=2800
+        RUST_SERVER_SEED=0
+        RUST_SERVER_BANNER_URL=$BANNER_URL
+        RUST_OXIDE_ENABLED=1
+        RUST_UPDATE_CHECKING=1
+        EOF
+        
+    - name: Commit et push le fichier .env
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .env
+        git commit -m "Mise à jour du fichier .env"
+        git push

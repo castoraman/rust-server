@@ -15,5 +15,5 @@ services:
     volumes:
       - ~/rust/files:/steamcmd/rust
     env_file:
-      - ~/rust/rust.env
+      - ~/rust/local-files/server.env
     restart: unless-stopped
