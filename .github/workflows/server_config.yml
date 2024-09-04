@@ -50,7 +50,7 @@ jobs:
         relationshipmanager.maxteamsize "3"
         server.server_id "$SERVER_ID"
         server.tags "monthly,EU"
-        EOF 
+        EOF
         
   copy-cfg-file:
     runs-on: self-hosted
