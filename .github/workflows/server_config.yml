@@ -27,12 +27,31 @@ jobs:
         RUST_SERVER_DESCRIPTION=$SERVER_DESCRIPTION
         RUST_RCON_PASSWORD=$RCON_PASSWORD
         RUST_SERVER_MAXPLAYERS=64
-        RUST_SERVER_WORLDSIZE=2800
+        RUST_SERVER_WORLDSIZE=3000
         RUST_SERVER_SEED=0
         RUST_SERVER_BANNER_URL=$BANNER_URL
         RUST_OXIDE_ENABLED=1
         RUST_UPDATE_CHECKING=1
         EOF
+
+  create-cfg-file:
+    runs-on: self-hosted
+
+    steps:
+    - name: Code checkout
+      uses: actions/checkout@v2
+
+    - name: Update cfg file
+      env:
+        SERVER_ID: ${{ secrets.SERVER_ID }}
+      run: |
+        cat << EOF > ~/rust/local-files/server.cfg
+        fps.limit "60"
+        relationshipmanager.maxteamsize "3"
+        server.server_id "$SERVER_ID"
+        server.tags "monthly,EU"
+        EOF 
+        
   copy-cfg-file:
     runs-on: self-hosted
 
