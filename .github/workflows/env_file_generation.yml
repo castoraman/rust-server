@@ -1,4 +1,4 @@
-name: Créer le fichier .env
+name: Update config files
 
 on:
   push:
@@ -10,10 +10,10 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    - name: Checkout du code
+    - name: Code checkout
       uses: actions/checkout@v2
       
-    - name: Créer le fichier .env
+    - name: Update .env file
       env:
         RCON_PASSWORD: ${{ secrets.RCON_PASSWORD }}
         SERVER_NAME: ${{ vars.SERVER_NAME }}
@@ -22,7 +22,7 @@ jobs:
       run: |
         cat << EOF > ~/rust/local-files/server.env
         RUST_SERVER_STARTUP_ARGUMENTS=-batchmode -load +server.secure 1
-        RUST_SERVER_IDENTITY=RustBar2
+        RUST_SERVER_IDENTITY=Rust_Bar
         RUST_SERVER_NAME=$SERVER_NAME
         RUST_SERVER_DESCRIPTION=$SERVER_DESCRIPTION
         RUST_RCON_PASSWORD=$RCON_PASSWORD
@@ -33,3 +33,13 @@ jobs:
         RUST_OXIDE_ENABLED=1
         RUST_UPDATE_CHECKING=1
         EOF
+  copy-cfg-file:
+    runs-on: self-hosted
+
+    steps:
+    - name: Code checkout
+      uses: actions/checkout@v2
+      
+    - name: Copy cfg file
+      run: |
+        cp ~/rust/local-files/server.cfg ~/rust/files/server/Rust_Bar/cfg/server.cfg
